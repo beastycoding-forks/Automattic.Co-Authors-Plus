@@ -1011,6 +1011,13 @@ class CoAuthors_Guest_Authors {
 	 */
 	function get_guest_author_fields( $groups = 'all' ) {
 
+		if ( get_site_option( 'initial_db_version' ) < 23588 ) {
+			$oldcontact = 'contact-info';
+		}
+		else {
+			$oldcontact = 'hidden';
+		}
+
 		$groups        = (array) $groups;
 		$global_fields = array(
 			// Hidden (included in object, no UI elements)
@@ -1064,17 +1071,17 @@ class CoAuthors_Guest_Authors {
 			array(
 				'key'   => 'aim',
 				'label' => __( 'AIM', 'co-authors-plus' ),
-				'group' => 'contact-info',
+				'group' => $oldcontact,
 			),
 			array(
 				'key'   => 'yahooim',
 				'label' => __( 'Yahoo IM', 'co-authors-plus' ),
-				'group' => 'contact-info',
+				'group' => $oldcontact,
 			),
 			array(
 				'key'   => 'jabber',
 				'label' => __( 'Jabber / Google Talk', 'co-authors-plus' ),
-				'group' => 'contact-info',
+				'group' => $oldcontact,
 			),
 			array(
 				'key'               => 'description',
